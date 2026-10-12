@@ -1,0 +1,4 @@
+- name: Deploy custom index page
+   template:
+     src: roles/webserver/templates/index.html.j2
+     dest: /var/www/html/index.html
