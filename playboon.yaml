@@ -1,0 +1,30 @@
+---
+- name: Configure Webserver with Nginx
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Update apt cache and install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Start and enable Nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy custom web page
+      copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head><title>CI/CD Pipeline</title></head>
+          <body style="font-family: Arial; text-align: center; margin-top: 50px;">
+            <h1 style="color: #2e6c80;">Success! Jenkins Triggered Ansible</h1>
+            <p>Deployed automatically to 10.0.0.47 (15.206.166.143) on AWS EC2.</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        mode: '0644'
