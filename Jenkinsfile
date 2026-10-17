@@ -12,7 +12,7 @@ pipeline {
             steps {
                 ansiblePlaybook(
                     playbook: 'playbook.yml',
-                    inventory: 'hosts.ini',
+                    inventory: 'inventory/hosts.ini',
                     credentialsId: 'ansible-ssh-key',
                     disableHostKeyChecking: true,
                     colorized: true
